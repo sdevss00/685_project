@@ -21,3 +21,22 @@ This code trains and evaluates a **Learnable Forget Gate (M4)** that selects whi
 | `ci_metrics.py` | Bootstrap confidence interval utilities. |
 | `saved_dataset/` | Serialized tuple dataset cache (`m4_dataset.pt`). |
 | `LongMemEval/` | Expected location of the cleaned LongMemEval JSON file. |
+
+## Requirements and Setup Instructions
+
+- Python >= 3.13 (see `pyproject.toml`).
+- CUDA-ready GPU with >=16 GB memory (Qwen2.5-3B and MiniLM embeddings run on GPU).
+- Access to the Hugging Face Hub to download `Qwen/Qwen2.5-3B-Instruct` and `sentence-transformers/all-MiniLM-L6-v2`.
+- System packages for PyTorch + CUDA (install from https://pytorch.org if needed).
+
+Install the Python dependencies:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+pip install -e .
+```
+
+> The tagger loads the Qwen model in bfloat16 with `device_map="auto"`. Make sure your GPU supports bf16 or edit `Tagger.py`.
+
