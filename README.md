@@ -61,4 +61,27 @@ python main_train.py
 
 Adjust the constants at the top of the script if you want to change the number of training samples (`TRAIN_NUM`), the in-training evaluation split (`TRAIN_EVAL`), or training epochs.
 
+## Evaluation Pipeline
+
+`main_eval.py` loads:
+
+- the cached LongMemEval samples,
+- the SentenceTransformer embedder,
+- the trained forget gate, and
+- a fresh `A1TaggerLLM` instance.
+
+For each held-out session it:
+
+1. Builds/upates the memory store with tupleized dialogue turns.
+2. Retrieves candidate tuples using BM25.
+3. Applies the forget gate to re-rank and optionally remove tuples.
+4. Reports retrieval metrics (`hit@k`, `recall@k`, `ndcg@k`) and forgetting metrics (`FP`, `FR`, `HFR`, `RU`).
+5. Aggregates summary statistics plus bootstrap confidence intervals (see `ci_metrics.py`).
+
+Run evaluation:
+
+```bash
+python main_eval.py
+```
+
 
