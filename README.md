@@ -40,3 +40,12 @@ pip install -e .
 
 > The tagger loads the Qwen model in bfloat16 with `device_map="auto"`. Make sure your GPU supports bf16 or edit `Tagger.py`.
 
+## Data Preparation
+
+1. Download `longmemeval_s_cleaned.json` from LongMemEval and place it anywhere on disk (the repo assumes `/LongMemEval/data/longmemeval_s_cleaned.json`).
+2. Update the file path in `main_train.py` and `main_eval.py` if the file lives elsewhere.
+3. `data_pre.extract_single_session` already converts the multi-session JSON into CRS-style single sessions that the rest of the pipeline expects.
+
+
+
+
