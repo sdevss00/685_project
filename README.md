@@ -46,6 +46,19 @@ pip install -e .
 2. Update the file path in `main_train.py` and `main_eval.py` if the file lives elsewhere.
 3. `data_pre.extract_single_session` already converts the multi-session JSON into CRS-style single sessions that the rest of the pipeline expects.
 
+## Training the Forget Gate
 
+`main_train.py` performs every training step:
+
+1. **Tuple extraction & caching**: builds the tuple dataset from the first `TRAIN_NUM` LongMemEval sessions and saves it to `saved_dataset/m4_dataset.pt` so you do not need to re-run the expensive tagging step each time.
+2. **Model training**: creates minibatches from `M4TupleDataset`, trains `M4ForgetGate` with binary cross entropy, and writes `m4_forget_gate.pt`.
+
+Run training:
+
+```bash
+python main_train.py
+```
+
+Adjust the constants at the top of the script if you want to change the number of training samples (`TRAIN_NUM`), the in-training evaluation split (`TRAIN_EVAL`), or training epochs.
 
 
