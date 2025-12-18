@@ -83,5 +83,14 @@ Run evaluation:
 ```bash
 python main_eval.py
 ```
+## Metrics
+
+- **hit@k**: fraction of queries with at least one gold tuple retrieved in the top *k*.
+- **recall@k**: proportion of all gold tuples retrieved in the top *k*.
+- **ndcg@k**: ranking quality that rewards correct ordering.
+- **FP** (forget precision): percent of forgotten tuples that were actually low-utility.
+- **FR** (forget recall): percent of low-utility tuples the gate chose to forget.
+- **HFR**: percent of forgotten tuples that were high-utility (lower is better).
+- **RU** (retain utility): fraction of retained tuples that were high-utility.
 
 
